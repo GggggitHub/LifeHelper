@@ -17,10 +17,10 @@ import com.ns.yc.lifehelper.ui.find.presenter.FindFragmentPresenter;
 import com.ns.yc.lifehelper.ui.guide.view.activity.SelectFollowActivity;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.cn.ycbannerlib.banner.BannerView;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ycbjie.library.constant.Constant;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -191,31 +191,33 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
         //通过路由跳转到某模块的某个页面
         switch (position){
             case 0:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_GANK_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Gank.ACTIVITY_GANK_ACTIVITY);
                 break;
             case 1:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_ANDROID_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Android.ACTIVITY_ANDROID_ACTIVITY);
                 break;
+                //富文本
             case 2:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_NOTE_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Note.ACTIVITY_OTHER_ARTICLE);
                 break;
             case 3:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_MUSIC_GUIDE_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Music.ACTIVITY_MUSIC_GUIDE_ACTIVITY);
                 break;
             case 4:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_ZHIHU_ACTIVITY);
                 break;
             case 5:
                 Bundle bundle1 = new Bundle();
                 bundle1.putString(Constant.URL,Constant.FLUTTER);
                 bundle1.putString(Constant.TITLE,"flutter极致体验的WanAndroid客户端");
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
                 break;
+                //妹子画廊
             case 6:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_GALLERY_ACTIVITY);
                 break;
+                //相册画廊
             case 7:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_NEW_WX_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_COVER_ACTIVITY);
                 break;
             default:
                 break;
@@ -230,13 +232,13 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
                 Bundle bundle1 = new Bundle();
                 bundle1.putString(Constant.URL,Constant.GITHUB);
                 bundle1.putString(Constant.TITLE,"关于更多内容");
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
                 break;
             case 1:
                 Bundle bundle2 = new Bundle();
                 bundle2.putString(Constant.URL,Constant.ZHI_HU);
                 bundle2.putString(Constant.TITLE,"关于我的知乎");
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle2);
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle2);
                 break;
             default:
                 break;
@@ -248,28 +250,27 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     public void setGridClick(int position) {
         switch (position){
             case 0:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_VIDEO_VIDEO);
+                ARouterUtils.navigation(RouterConfig.Video.ACTIVITY_VIDEO_VIDEO);
                 break;
             case 1:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_SNAPHELPER_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_SNAPHELPER_ACTIVITY);
                 break;
             case 2:
                 ActivityUtils.startActivity(SelectFollowActivity.class);
                 break;
             case 3:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_BOOK_DOODLE_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_BOOK_DOODLE_ACTIVITY);
                 break;
             case 4:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_PIN_TU_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_PIN_TU_ACTIVITY);
                 break;
             case 5:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_AIR_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_AIR_ACTIVITY);
                 break;
             case 6:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_MONKEY_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_MONKEY_ACTIVITY);
                 break;
             case 7:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_WORK_ACTIVITY);
                 break;
             default:
                 break;
@@ -281,13 +282,13 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     public void setGridClickThird(int position) {
         switch (position){
             case 0:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_DOU_MOVIE_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.DouBan.ACTIVITY_DOU_MOVIE_ACTIVITY);
                 break;
             case 1:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_DOU_MUSIC_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.DouBan.ACTIVITY_DOU_MUSIC_ACTIVITY);
                 break;
             case 2:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_DOU_BOOK_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.DouBan.ACTIVITY_DOU_BOOK_ACTIVITY);
                 break;
             default:
                 break;
@@ -299,13 +300,12 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     public void setGridClickFour(int position) {
         switch (position){
             case 0:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_BANNER_LIST_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_BANNER_LIST_ACTIVITY);
                 break;
             case 1:
 
                 break;
             case 2:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_ZHIHU_ACTIVITY);
                 break;
             default:
                 break;
@@ -318,7 +318,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
         if(position>-1 && url!=null && url.length()>0){
             Bundle bundle = new Bundle();
             bundle.putString(Constant.URL,url);
-            ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
+            ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
         }
     }
 
@@ -327,7 +327,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
         if(position>-1 && url!=null && url.length()>0){
             Bundle bundle = new Bundle();
             bundle.putString(Constant.URL,url);
-            ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
+            ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
         }
     }
 

@@ -14,15 +14,13 @@ import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeFragmentContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeFragmentPresenter;
 import com.ns.yc.lifehelper.ui.me.view.activity.IndexJsActivity;
-import com.ns.yc.lifehelper.ui.me.view.activity.MeCollectActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeLoginActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeTimerActivity;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ycbjie.library.inter.listener.NoDoubleClickListener;
 import com.ycbjie.library.utils.AppToolUtils;
 
 
@@ -117,12 +115,7 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
         mRlMeQuestion.setOnClickListener(this);
         mRlMeSetting.setOnClickListener(this);
         mRlMeFeedBack.setOnClickListener(this);
-        mRlMePhone.setOnClickListener(new NoDoubleClickListener() {
-            @Override
-            protected void onNoDoubleClick(View view) {
-                toCallMe();
-            }
-        });
+        mRlMePhone.setOnClickListener(this);
         mIvPersonImage.setOnClickListener(this);
     }
 
@@ -141,16 +134,13 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
                 startActivity(IndexJsActivity.class);
                 break;
             case R.id.rl_me_project:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LOVE_ACTIVITY);
-                break;
-            case R.id.rl_me_collect:
-                startActivity(MeCollectActivity.class);
+                ARouterUtils.navigation(RouterConfig.Love.ACTIVITY_LOVE_ACTIVITY);
                 break;
             case R.id.rl_me_setting:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_APP_SETTING_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.App.ACTIVITY_APP_SETTING_ACTIVITY);
                 break;
             case R.id.rl_me_feed_back:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_FEEDBACK);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_FEEDBACK);
                 break;
             case R.id.rl_me_phone:
                 toCallMe();

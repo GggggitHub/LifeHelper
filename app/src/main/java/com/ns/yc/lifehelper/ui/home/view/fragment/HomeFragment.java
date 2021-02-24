@@ -1,15 +1,20 @@
 package com.ns.yc.lifehelper.ui.home.view.fragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.NetworkUtils;
@@ -20,18 +25,22 @@ import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.home.presenter.HomeFragmentPresenter;
 import com.ns.yc.lifehelper.ui.home.view.adapter.HomeBlogAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.yccardviewlib.CardViewLayout;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.marquee.MarqueeView;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.bean.HomeBlogEntity;
+import com.yc.configlayer.constant.Constant;
+import com.yc.toollayer.FastClickUtils;
+import com.yc.toollayer.GoToScoreUtils;
+import com.yc.toollayer.WindowUtils;
+import com.yc.toollayer.handler.HandlerUtils;
+import com.yc.toollib.crash.CrashToolUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.model.HomeBlogEntity;
-import com.ycbjie.library.utils.handler.HandlerUtils;
-import com.ycbjie.library.web.view.WebViewActivity;
+import com.ycbjie.library.utils.AppUtils;
+import com.ycbjie.library.web.WebViewActivity;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -146,7 +155,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                 WebViewActivity.lunch(activity,adapter.getAllData().get(position).getUrl()
                         ,adapter.getAllData().get(position).getTitle());
             } else if (position == 0) {
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_ZHIHU_ACTIVITY);
+
             }
         });
     }
@@ -200,18 +209,25 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                 marqueeView = header.findViewById(R.id.marqueeView);
                 cardViewLayout = header.findViewById(R.id.cardView);
                 View.OnClickListener listener = v -> {
+                    if (FastClickUtils.isFastDoubleClick()){
+                        return;
+                    }
                     switch (v.getId()) {
+                            //跳转视频
                         case R.id.tv_home_first:
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_VIDEO_VIDEO);
+                            ARouterUtils.navigation(RouterConfig.Video.ACTIVITY_VIDEO_VIDEO);
                             break;
+                            //飞机大战
                         case R.id.tv_home_second:
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_AIR_ACTIVITY);
+                            ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_AIR_ACTIVITY);
                             break;
+                            //跳转崩溃列表
                         case R.id.tv_home_third:
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_TX_NEWS_ACTIVITY);
+                            CrashToolUtils.startCrashListActivity(activity);
                             break;
+                            //干活集中营
                         case R.id.tv_home_four:
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_GANK_KNOWLEDGE_ACTIVITY);
+                            ARouterUtils.navigation(RouterConfig.Gank.ACTIVITY_GANK_KNOWLEDGE_ACTIVITY);
                             break;
                         default:
                             break;
@@ -252,19 +268,19 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
         marqueeView.setOnItemClickListener((position, textView) -> {
             switch (position) {
                 case 0:
-                    DialogUtils.showCustomPopupWindow(activity);
+                    showCustomPopupWindow(activity);
                     break;
                 case 1:
                     Bundle bundle1 = new Bundle();
                     bundle1.putString(Constant.URL,Constant.GITHUB);
                     bundle1.putString(Constant.TITLE,"关于更多内容");
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
+                    ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
                     break;
                 case 2:
                     Bundle bundle2 = new Bundle();
                     bundle2.putString(Constant.URL,Constant.ZHI_HU);
                     bundle2.putString(Constant.TITLE,"关于我的知乎");
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle2);
+                    ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle2);
                     break;
                 default:
                     break;
@@ -343,9 +359,49 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
             @Override
             public void onItemClick(View view, int position) {
                 super.onItemClick(view, position);
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_GALLERY_ACTIVITY);
             }
         });
     }
+
+
+
+    private static final String QQ_URL = "http://android.myapp.com/myapp/detail.htm?apkName=com.zero2ipo.harlanhu.pedaily";
+    /**
+     * 自定义PopupWindow
+     */
+    private void showCustomPopupWindow(final Activity activity){
+        if(AppUtils.isActivityLiving(activity)){
+            View popMenuView = activity.getLayoutInflater().inflate(R.layout.dialog_custom_window, null);
+            final PopupWindow popMenu = new PopupWindow(popMenuView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
+            popMenu.setClippingEnabled(false);
+            popMenu.setFocusable(true);
+            popMenu.showAtLocation(popMenuView, Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            WindowUtils.setBackgroundAlpha(activity,0.5f);
+
+            TextView tvStar = popMenuView.findViewById(R.id.tv_star);
+            TextView tvFeedback = popMenuView.findViewById(R.id.tv_feedback);
+            TextView tvLook = popMenuView.findViewById(R.id.tv_look);
+            tvStar.setOnClickListener(v -> {
+                //吐槽跳转意见反馈页面
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_FEEDBACK);
+                popMenu.dismiss();
+            });
+            tvFeedback.setOnClickListener(v -> {
+                if(GoToScoreUtils.isPkgInstalled(activity,"com.tencent.mm")){
+                    GoToScoreUtils.startMarket(activity,"com.tencent.mm");
+                } else {
+                    Intent intent = new Intent(activity, WebViewActivity.class);
+                    intent.putExtra("url", QQ_URL);
+                    activity.startActivity(intent);
+                }
+                popMenu.dismiss();
+            });
+            tvLook.setOnClickListener(v -> popMenu.dismiss());
+            popMenu.setOnDismissListener(() -> WindowUtils.setBackgroundAlpha(activity,1.0f));
+        }
+    }
+
+
 
 }

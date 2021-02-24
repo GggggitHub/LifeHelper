@@ -8,14 +8,14 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.model.bean.SelectPoint;
+import com.ns.yc.lifehelper.bean.SelectPoint;
 import com.ns.yc.lifehelper.ui.guide.contract.SelectFollowContract;
 import com.ns.yc.lifehelper.ui.guide.presenter.SelectFollowPresenter;
 import com.ns.yc.lifehelper.ui.guide.view.adapter.SelectFollowAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.cn.ycrecycleviewlib.select.SelectRecyclerView;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.constant.Constant;
 
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
 

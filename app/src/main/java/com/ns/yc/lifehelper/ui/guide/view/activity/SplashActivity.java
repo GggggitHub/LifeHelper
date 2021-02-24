@@ -13,8 +13,8 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.yccountdownviewlib.CountDownView;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.constant.Constant;
 
 import java.util.List;
 
@@ -83,6 +83,7 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
             Manifest.permission.CAMERA,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
     };
 
     @AfterPermissionGranted(RC_LOCATION_CONTACTS_PERM)

@@ -211,6 +211,14 @@
         <item>@drawable/ic_project</item>
         <item>@drawable/ic_financing</item>
         <item>@drawable/ic_show</item>
+        <item>@drawable/ic_investment</item>
+        <item>@drawable/ic_project</item>
+        <item>@drawable/ic_financing</item>
+        <item>@drawable/ic_show</item>
+        <item>@drawable/ic_investment</item>
+        <item>@drawable/ic_project</item>
+        <item>@drawable/ic_financing</item>
+        <item>@drawable/ic_show</item>
     </integer-array>
 
     <!--数据页小工具图片对应的位子-->
@@ -219,7 +227,7 @@
         <item>轮播图</item>
         <item>爱心表达</item>
         <item>杀毒进度</item>
-        <item>微信新闻</item>
+        <item>NFC</item>
         <item>飞机大战</item>
         <item>老虎机</item>
         <item>电影评分</item>
@@ -227,6 +235,14 @@
         <item>逗比视频</item>
         <item>百分比条</item>
         <item>绘画板</item>
+        <item>去评分</item>
+        <item>日历事件</item>
+        <item>测崩溃</item>
+        <item>崩溃列表</item>
+        <item>条形码</item>
+        <item>二维码</item>
+        <item>dai</item>
+        <item>dai</item>
     </string-array>
 
     <!--数据页横向滑动图片-->

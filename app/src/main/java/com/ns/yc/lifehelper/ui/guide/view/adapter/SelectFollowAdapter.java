@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.model.bean.SelectPoint;
-import com.ycbjie.library.inter.listener.OnListItemClickListener;
+import com.ns.yc.lifehelper.bean.SelectPoint;
 import com.yc.cn.ycrecycleviewlib.select.SelectRecyclerViewAdapter;
+import com.ycbjie.library.listener.OnListItemClickListener;
 
 import java.util.List;
 

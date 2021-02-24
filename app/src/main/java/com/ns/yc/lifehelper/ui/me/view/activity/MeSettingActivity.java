@@ -16,17 +16,17 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeSettingPresenter;
-import com.ns.yc.lifehelper.utils.FileCacheUtils;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 import com.ns.yc.ycutilslib.switchButton.SwitchButton;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.constant.Constant;
+import com.yc.toollayer.file.FileCacheUtils;
 import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.utils.AppToolUtils;
-import com.ycbjie.library.web.view.WebViewActivity;
+import com.ycbjie.library.web.WebViewActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -43,7 +43,7 @@ import cn.ycbjie.ycthreadpoollib.PoolThread;
  *     revise:
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_APP_SETTING_ACTIVITY)
+@Route(path = RouterConfig.App.ACTIVITY_APP_SETTING_ACTIVITY)
 public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implements View.OnClickListener,
         MeSettingContract.View, SwitchButton.OnCheckedChangeListener {
 
@@ -175,7 +175,7 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
                 presenter.cleanAppCache(this);
                 break;
             case R.id.rl_set_feedback:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_FEEDBACK);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_FEEDBACK);
                 break;
             case R.id.rl_set_update:
                 presenter.checkVersion(appVersionName);
@@ -184,7 +184,7 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
                 Bundle bundleMore = new Bundle();
                 bundleMore.putString(Constant.URL,Constant.JIAN_SHU);
                 bundleMore.putString(Constant.TITLE,Constant.JIAN_SHU);
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_ABOUT_ME,bundleMore);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_ABOUT_ME,bundleMore);
                 break;
             case R.id.rl_set_about_us:
                 Bundle bundleAbout = new Bundle();
